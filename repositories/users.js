@@ -15,14 +15,11 @@ class UsersRepository {
   }
 
   async getAll() {
-    //Open the file named after this.filename
-    const contents = await FS.promises.readFile(this.filename, {
-      encoding: "utf-8",
-    });
-    //Parse the content
-    const data = JSON.parse(contents);
-    //Return the parsed content
-    return data;
+    return JSON.parse(
+      await FS.promises.readFile(this.filename, {
+        encoding: "utf-8",
+      })
+    );
   }
 }
 
