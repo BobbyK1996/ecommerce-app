@@ -1,4 +1,5 @@
-import FS, { fstat, utimes } from "fs";
+import FS from "fs";
+import CRYPTO from "crypto";
 
 class UsersRepository {
   constructor(filename) {
@@ -23,10 +24,10 @@ class UsersRepository {
   }
 
   async create(attributes) {
+    attributes.id = this.randomId();
     const records = await this.getAll();
     records.push(attributes);
 
-    //Write the updated records array to this.filename
     await this.writeAll(records);
   }
 
@@ -35,6 +36,10 @@ class UsersRepository {
       this.filename,
       JSON.stringify(records, null, 2)
     );
+  }
+
+  randomId() {
+    return CRYPTO.randomBytes(4).toString("hex");
   }
 }
 
