@@ -84,15 +84,5 @@ class UsersRepository {
   }
 }
 
-const repo = new UsersRepository("users.json");
-
-// await repo.create({ email: "test@email.com", password: "1234" });
-
-// await repo.create({ email: "test@test.com" });
-// await repo.update("96d4c972", { password: "differentpassword" });
-const user = await repo.getOneBy({
-  email: "test@test.com",
-  password: "differentpassword",
-});
-console.log(user);
-// const users = await repo.getAll();
+//Since we only ever need one copy of this...
+export default new UsersRepository("users.json");
