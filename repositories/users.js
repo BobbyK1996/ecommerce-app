@@ -31,18 +31,25 @@ class UsersRepository {
     attributes.id = this.randomId();
 
     const salt = CRYPTO.randomBytes(8).toString("hex");
-    const hashed = await scrypt(attributes.password, salt, 64);
+    const hashedBuffer = await scrypt(attributes.password, salt, 64);
 
     const records = await this.getAll();
     const record = {
       ...attributes,
-      password: `${hashed.toString("hex")}.${salt}`,
+      password: `${hashedBuffer.toString("hex")}.${salt}`,
     };
     records.push(record);
 
     await this.writeAll(records);
 
     return record;
+  }
+
+  async comparePasswords(saved, supplied) {
+    const [hashedSaved, salt] = saved.split(".");
+    const hashedSuppliedBuffer = await scrypt(supplied, salt, 64);
+
+    return hashedSaved === hashedSuppliedBuffer.toString("hex");
   }
 
   async writeAll(records) {
