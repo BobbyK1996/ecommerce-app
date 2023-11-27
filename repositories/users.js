@@ -1,5 +1,9 @@
 import FS from "fs";
+// import CRYPTO, { scrypt } from "crypto";
 import CRYPTO from "crypto";
+import UTIL from "util";
+
+const scrypt = UTIL.promisify(CRYPTO.scrypt);
 
 class UsersRepository {
   constructor(filename) {
@@ -25,12 +29,20 @@ class UsersRepository {
 
   async create(attributes) {
     attributes.id = this.randomId();
+
+    const salt = CRYPTO.randomBytes(8).toString("hex");
+    const hashed = await scrypt(attributes.password, salt, 64);
+
     const records = await this.getAll();
-    records.push(attributes);
+    const record = {
+      ...attributes,
+      password: `${hashed.toString("hex")}.${salt}`,
+    };
+    records.push(record);
 
     await this.writeAll(records);
 
-    return attributes;
+    return record;
   }
 
   async writeAll(records) {
