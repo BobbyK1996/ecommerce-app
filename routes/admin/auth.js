@@ -3,10 +3,10 @@ import { check, validationResult } from "express-validator";
 import usersRepo from "../../repositories/users.js";
 import signupTemplate from "../../views/admin/auth/signup.js";
 import signinTemplate from "../../views/admin/auth/signin.js";
-import validators from "./validators.js";
+import postValidators from "./validators.js";
 
 const { requireEmail, requirePassword, requirePasswordConfirmation } =
-  validators;
+  postValidators;
 
 const router = express.Router();
 
@@ -37,7 +37,11 @@ router.post(
   [requireEmail, requirePassword, requirePasswordConfirmation],
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
+
+    if (!errors.isEmpty()) {
+      return res.send(signupTemplate({ req, errors }));
+    }
+
     const { email, password, passwordConfirmation } = req.body;
 
     const user = await usersRepo.create({ email, password });
