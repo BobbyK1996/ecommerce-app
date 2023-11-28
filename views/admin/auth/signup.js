@@ -8,6 +8,7 @@ const getError = (errors, propertyName) => {
         return error.msg;
       }
     }
+    return "";
   } catch (err) {
     return "";
   }
