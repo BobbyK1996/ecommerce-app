@@ -3,6 +3,10 @@ import { check, validationResult } from "express-validator";
 import usersRepo from "../../repositories/users.js";
 import signupTemplate from "../../views/admin/auth/signup.js";
 import signinTemplate from "../../views/admin/auth/signin.js";
+import validators from "./validators.js";
+
+const { requireEmail, requirePassword, requirePasswordConfirmation } =
+  validators;
 
 const router = express.Router();
 
@@ -30,32 +34,7 @@ router.get("/signup", (req, res) => {
 
 router.post(
   "/signup",
-  [
-    check("email")
-      .trim()
-      .normalizeEmail()
-      .isEmail()
-      .withMessage("Must be a valid email")
-      .custom(async (email) => {
-        const existingUser = await usersRepo.getOneBy({ email });
-        if (existingUser) {
-          throw new Error("Email in use");
-        }
-      }),
-    check("password")
-      .trim()
-      .isLength({ min: 4, max: 20 })
-      .withMessage("Must be between 4 and 20 characters"),
-    check("passwordConfirmation")
-      .trim()
-      .isLength({ min: 4, max: 20 })
-      .withMessage("Must be between 4 and 20 characters")
-      .custom((passwordConfirmation, { req }) => {
-        if (passwordConfirmation !== req.body.password) {
-          throw new Error("Passwords must match");
-        }
-      }),
-  ],
+  [requireEmail, requirePassword, requirePasswordConfirmation],
   async (req, res) => {
     const errors = validationResult(req);
     console.log(errors);
