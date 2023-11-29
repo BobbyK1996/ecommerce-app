@@ -62,7 +62,7 @@ router.get("/signout", (req, res) => {
 });
 
 router.get("/signin", (req, res) => {
-  res.send(signinTemplate());
+  res.send(signinTemplate({}));
 });
 
 router.post(
@@ -70,12 +70,13 @@ router.post(
   [requireEmailExists, requireValidPasswordForUser],
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(errors);
+
+    if (!errors.isEmpty()) {
+      return res.send(signinTemplate({ errors }));
+    }
 
     const { email } = req.body;
-
     const user = await usersRepo.getOneBy({ email });
-
     req.session.userId = user.id;
 
     res.send("You are signed in");

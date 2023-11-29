@@ -1,13 +1,7 @@
 import layout from "../layout.js";
+import helpers from "../../helpers.js";
 
-const getError = (errors, propertyName) => {
-  try {
-    const error = errors.errors.find((error) => error.path === propertyName);
-    return error ? error.msg : "";
-  } catch (err) {
-    return "";
-  }
-};
+const { getError } = helpers;
 
 export default ({ req, errors }) => {
   return layout({
