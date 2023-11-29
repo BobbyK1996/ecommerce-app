@@ -2,13 +2,8 @@ import layout from "../layout.js";
 
 const getError = (errors, propertyName) => {
   try {
-    const errorsInner = errors["errors"];
-    for (const error of errorsInner) {
-      if (error["path"] === propertyName) {
-        return error.msg;
-      }
-    }
-    return "";
+    const error = errors.errors.find((error) => error.path === propertyName);
+    return error ? error.msg : "";
   } catch (err) {
     return "";
   }
