@@ -1,7 +1,5 @@
 import layout from "../layout.js";
-import helpers from "../../helpers.js";
-
-const { getError } = helpers;
+import { getError } from "../../helpers.js";
 
 export default ({ errors }) => {
   return layout({
