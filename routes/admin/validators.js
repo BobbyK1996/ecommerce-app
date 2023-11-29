@@ -2,13 +2,17 @@ import { check } from "express-validator";
 import usersRepo from "../../repositories/users.js";
 
 export default {
-  requireTitle: check("title").trim().isLength({ min: 5, max: 40 }),
+  requireTitle: check("title")
+    .trim()
+    .isLength({ min: 5, max: 40 })
+    .withMessage("Must be between 5 and 40 characters"),
   requirePrice: check("price")
     .trim()
     .customSanitizer((floatVal) => {
       return parseFloat(floatVal);
     })
-    .isFloat({ min: 1 }),
+    .isFloat({ min: 0 })
+    .withMessage("Must be a number, 0 or greater"),
   requireEmail: check("email")
     .trim()
     .normalizeEmail()
