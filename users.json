@@ -8,5 +8,10 @@
     "email": "test1@test.com",
     "password": "0340d0fed795d6e5093b0f0377463054545207a85118532d596b3736505bd73a12ea3562759598078b90fe1f6b64dff33ef57c6b5a9cc83632497b113a7437b4.a580a0bc2ec9047e",
     "id": "03cee94b"
+  },
+  {
+    "email": "test2@test.com",
+    "password": "7708ff8e9396d103b8c3c576e59b1f802de44395abc2b8b8470b15fb7aecfeb8c37eb569fcde445cfcdba07353e36ba11fa93d91c35abf6ed45dd8e6fee4988f.63e7802f1ac04bc8",
+    "id": "386f3869"
   }
 ]

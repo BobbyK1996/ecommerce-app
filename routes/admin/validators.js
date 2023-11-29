@@ -1,7 +1,7 @@
 import { check } from "express-validator";
 import usersRepo from "../../repositories/users.js";
 
-export default {
+export const validationRulesProducts = {
   requireTitle: check("title")
     .trim()
     .isLength({ min: 5, max: 40 })
@@ -13,6 +13,9 @@ export default {
     })
     .isFloat({ min: 0 })
     .withMessage("Must be a number, 0 or greater"),
+};
+
+export const validationRulesAuth = {
   requireEmail: check("email")
     .trim()
     .normalizeEmail()
