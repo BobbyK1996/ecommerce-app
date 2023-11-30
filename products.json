@@ -1,18 +1,18 @@
 [
   {
-    "title": "adfhdsf",
-    "price": "10",
+    "title": "Pants",
+    "price": 10,
     "image": "iVBORw0KGgoAAAANSUhEUgAAACIAAAAWCAIAAAAqztkuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZSURBVEhL7cEBDQAAAMKg909tDwcEAHCiBgjaAAF+SCm4AAAAAElFTkSuQmCC",
     "id": "ceb3e192"
   },
   {
-    "title": "gfdgjdfgji",
+    "title": "Bag",
     "price": 93290432,
     "image": "iVBORw0KGgoAAAANSUhEUgAAACIAAAAWCAIAAAAqztkuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZSURBVEhL7cEBDQAAAMKg909tDwcEAHCiBgjaAAF+SCm4AAAAAElFTkSuQmCC",
     "id": "2dfbd243"
   },
   {
-    "title": "test product",
+    "title": "Coat",
     "price": 100,
     "image": "iVBORw0KGgoAAAANSUhEUgAAACIAAAAWCAIAAAAqztkuAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAZSURBVEhL7cEBDQAAAMKg909tDwcEAHCiBgjaAAF+SCm4AAAAAElFTkSuQmCC",
     "id": "6c16b3d0"
