@@ -30,7 +30,7 @@ router.post(
     const image = req.file.buffer.toString("base64");
     await productsRepo.create({ title, price, image });
 
-    res.send("submitted");
+    res.redirect("/admin/products");
   }
 );
 
