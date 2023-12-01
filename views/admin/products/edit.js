@@ -2,7 +2,7 @@ import layout from "../layout.js";
 
 export default ({ product }) => {
   return layout({
-    content: html`
+    content: `
       <form method="POST">
         <input name="title" value="${product.title}" />
         <input name="price" value="${product.price}" />
