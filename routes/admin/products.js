@@ -5,6 +5,7 @@ import { handleErrors, requireAuth } from "./middlewares.js";
 import productsRepo from "../../repositories/products.js";
 import productsNewTemplate from "../../views/admin/products/new.js";
 import productsIndexTemplate from "../../views/admin/products/index.js";
+import productsEditTemplate from "../../views/admin/products/edit.js";
 import { validationRulesProducts } from "./validators.js";
 
 const { requireTitle, requirePrice } = validationRulesProducts;
@@ -34,5 +35,16 @@ router.post(
     res.redirect("/admin/products");
   }
 );
+
+router.get("/admin/products/:id/edit", requireAuth, async (req, res) => {
+  console.log(req.params.id);
+  const product = await productsRepo.getOne(req.params.id);
+
+  if (!product) {
+    return res.send("Product not found");
+  }
+
+  res.send(productsEditTemplate({ product }));
+});
 
 export default router;
