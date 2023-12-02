@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const products = await productsRepo.getAll();
-  console.log(products);
+  // console.log(products);
   res.send(productsIndexTemplate({ products }));
 });
 

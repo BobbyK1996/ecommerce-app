@@ -4,6 +4,7 @@ import cookieSession from "cookie-session";
 import authRouter from "./routes/admin/auth.js";
 import adminProductsRouter from "./routes/admin/products.js";
 import productsRouter from "./routes/products.js";
+import cartsRouter from "./routes/carts.js";
 
 const app = express();
 const PORT = 3000;
@@ -18,6 +19,7 @@ app.use(
 app.use(authRouter);
 app.use(adminProductsRouter);
 app.use(productsRouter);
+app.use(cartsRouter);
 
 app.listen(PORT, () => {
   console.log("Listening");
