@@ -8,6 +8,9 @@ const router = express.Router();
 
 //Post request to add item to cart
 router.post("/cart/products", async (req, res) => {
+  if (req.method !== "POST") {
+    return res.status(405).send("Method Not Allowed");
+  }
   //Does the user already have a cart or not
   let cart;
   if (!req.session.cartId) {
@@ -32,10 +35,14 @@ router.post("/cart/products", async (req, res) => {
     items: cart.items,
   });
 
-  res.send("Product added to cart");
+  res.redirect("/cart");
 });
-//Post request to show all items in cart
+//Get request to show all items in cart
 router.get("/cart", async (req, res) => {
+  if (req.method !== "GET") {
+    return res.status(405).send("Method Not Allowed");
+  }
+
   if (!req.session.cartId) {
     return res.redirect("/");
   }
@@ -48,9 +55,20 @@ router.get("/cart", async (req, res) => {
     item.product = product;
   }
 
+  console.log(req.method);
+
   res.send(cartShowTemplate({ items: cart.items }));
 });
 
 //Post request to delete item from cart
+router.post("/cart/products/delete", async (req, res) => {
+  const { itemId } = req.body;
+  const cart = await cartsRepo.getOne(req.session.cartId);
 
+  const items = cart.items.filter((item) => item.id !== itemId);
+
+  await cartsRepo.update(req.session.cartId, { items });
+
+  res.redirect("/cart");
+});
 export default router;
